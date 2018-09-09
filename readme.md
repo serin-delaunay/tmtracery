@@ -46,6 +46,7 @@ Valid tape head directions are `<` (left), `>` (right), and `_` (remain).
 
 ## Example machine
 
+```
 {
     "function": "Accepts a string iff it is empty, or starts with 0 and consists of alternating 1s and 0s."
     "states": ["A", "B", "Y", "N"],
@@ -63,6 +64,7 @@ Valid tape head directions are `<` (left), `>` (right), and `_` (remain).
 		[["B", "_"], ["Y", "_", "_"]]
 	]
 }
+```
 
 # Execution model
 
