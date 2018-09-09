@@ -28,10 +28,10 @@ class Action(NamedTuple):
     direction: str
     def code(self, accept, reject):
         if self.state == accept or self.state == reject:
-            run_next = "[run_next:#activate_next#]"
-        else:
             run_next = ""
-        return "[state:{0}][tape_after:{1}][direction:{2}]{3}".format(self.state, self.symbol, self.direction, run_next)
+        else:
+            run_next = "[run_next:#activate_next#]"
+        return "[state:{0}][tape_right:{1}][direction:{2}]{3}".format(self.state, self.symbol, self.direction, run_next)
 
 TransitionFunction = Dict[StateSymbol, Action]
 
