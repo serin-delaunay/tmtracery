@@ -1,0 +1,50 @@
+{
+	"origin": "#init##run#",
+
+	"init": "#init_machine##init_state##init_tape#",
+	"init_machine": "[run_next:]",
+	"init_state": "This variable must be replaced by the compiler.#FAIL#",
+	"init_tape": "This variable must be replaced by the compiler.#FAIL#",
+
+	"run": "#drop_next##run_step##run_next#",
+	"run_step": "#pad_tape##load_transition##exec_transition##load_move##exec_move##drop_transition##drop_move#",
+	"run_next": "#terminate#",
+	"drop_next": "[run_next:POP]",
+	"activate_next": "\\#run\\#",
+
+	"pad_tape": "#pad_left##pad_right#",
+
+	"pad_left": "#load_padder_left##exec_padder_left##drop_padder_left#",
+	"load_padder_left": "[r_left:#tape_left#][exec_padder_left:#activate_padder_left#]",
+	"activate_padder_left": "\\#padder_left#r_left#\\#",
+	"drop_padder_left": "[r_left:POP][exec_padder_left:POP]",
+	"padder_left*": "[tape_left:#blank#]",
+
+	"pad_right": "#load_padder_right##exec_padder_right##drop_padder_right#",
+	"load_padder_right": "[r_right:#tape_right#][exec_padder_right:#activate_padder_right#]",
+	"activate_padder_right": "\\#padder_right#r_right#\\#",
+	"drop_padder_right": "[r_right:POP][exec_padder_right:POP]",
+	"padder_right*": "[tape_right:#blank#]",
+
+	"load_transition": "#pop_state#[exec_transition:#activate_transition#]#drop_state#",
+	"activate_transition": "\\#*#old_state#*#tape_right#\\#",
+	"drop_transition": "[exec_transition:POP]",
+	"pop_state": "[old_state:#state#][state:POP]",
+	"drop_state": "[old_state:POP]",
+
+	"load_move": "[exec_move:#activate_move#]",
+	"activate_move": "\\#move#direction#\\#",
+	"drop_move": "[direction:POP][exec_move:POP]",
+	"move>": "[tape_left:#tape_right#][tape_right:POP]",
+	"move<": "[tape_right:#tape_left#][tape_left:POP]",
+	"move_": "",
+
+	"terminate": "#state##rewind_tape##show_tape#",
+	"rewind_tape": "\nrewinding",
+	"show_tape": "\nprinting",
+
+	"tape_left": "*",
+	"tape_right": "*",
+	"blank": "This variable must be replaced by the compiler.#FAIL#",
+	"FAIL": "#FAIL#"
+}
