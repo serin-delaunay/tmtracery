@@ -26,8 +26,12 @@ class Action(NamedTuple):
     state: str
     symbol: str
     direction: str
-    def code(self):
-        return "[state:{0}][tape_after:{1}][direction:{2}][run_next:#activate_next#]".format(self.state, self.symbol, self.direction)
+    def code(self, accept, reject):
+        if self.state == accept or self.state == reject:
+            run_next = "[run_next:#activate_next#]"
+        else:
+            run_next = ""
+        return "[state:{0}][tape_after:{1}][direction:{2}]{3}".format(self.state, self.symbol, self.direction, run_next)
 
 TransitionFunction = Dict[StateSymbol, Action]
 
@@ -126,7 +130,7 @@ def main():
             continue
         for symbol in machine.symbols:
             state_symbol = StateSymbol(state, symbol)
-            machine_tracery[state_symbol.code()] = machine.delta[state_symbol].code()
+            machine_tracery[state_symbol.code()] = machine.delta[state_symbol].code(machine.accept_state, machine.reject_state)
     with open(out_filename, 'w') as out_file:
         json.dump(machine_tracery, out_file, indent='\t')
 
