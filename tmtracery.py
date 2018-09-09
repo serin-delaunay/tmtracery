@@ -31,7 +31,7 @@ class Action(NamedTuple):
             run_next = ""
         else:
             run_next = "[run_next:#activate_next#]"
-        return "[state:{0}][tape_right:{1}][direction:{2}]{3}".format(self.state, self.symbol, self.direction, run_next)
+        return "[state:{0}][tape_right:POP][tape_right:{1}][direction:{2}]{3}".format(self.state, self.symbol, self.direction, run_next)
 
 TransitionFunction = Dict[StateSymbol, Action]
 
