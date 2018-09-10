@@ -99,6 +99,8 @@ def main():
                         help='optional input tape file for the machine')
     parser.add_argument('--output', metavar='o', type=str,
                         help='optional output filename')
+    parser.add_argument('--verbose', dest='verbose', action='store_true')
+    parser.set_defaults(verbose=False)
     args = parser.parse_args()
     with open(args.machine) as machine_file:
         machine_json = json.load(machine_file)
@@ -119,6 +121,11 @@ def main():
         machine_tracery = json.load(tracery_base_file, object_pairs_hook=OrderedDict)
     machine_tracery['init_tape'] = ''.join('[tape_right:{}]'.format(symbol) for symbol in reversed(input))
     machine_tracery['init_state'] = "[state:{}]".format(machine.start_state)
+    if args.verbose:
+        machine_tracery['run'] = "#state##tape_right# " + machine_tracery['run']
+        for k,v in machine_tracery.items():
+            if 'activate' not in k and not k.startswith('tape'):
+                machine_tracery[k] = "\n*{}*".format(k) + v
     machine_tracery['blank'] = machine.blank_symbol
     for symbol in machine.symbols:
         machine_tracery["padder_left{}".format(symbol)] = ""
