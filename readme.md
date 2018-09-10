@@ -71,3 +71,17 @@ Valid tape head directions are `<` (left), `>` (right), and `_` (remain).
 The simulated machine has one double-sided infinite tape, implemented as a pair of stacks.
 When either end of the tape is reached, an additional blank symbol is automatically appended to that side.
 
+# Limitations
+
+The produced Turing machine grammars only work on Tracery versions which have a bug allowing delayed expansion of dynamically specified tags.
+A simple example grammar using this bug is:
+
+```
+{
+    "origin": "[tweet:#start#]#tweet#",
+    "start": "\\#helloworld\\#",
+    "helloworld": "omg what how"
+}
+```
+
+This project is supported only on Tracery versions where this grammar evaluates to `"omg what how"`.
