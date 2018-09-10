@@ -89,7 +89,6 @@ class TuringMachine(NamedTuple):
 def validate_input(machine, input):
     for symbol in input:
         assert symbol in machine.symbols
-        assert symbol != machine.blank_symbol
 
 def main():
     parser = argparse.ArgumentParser(description='Compile Turing machines to Tracery grammars.')

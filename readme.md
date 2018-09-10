@@ -29,7 +29,7 @@ The machine must be encoded as a single object containing seven keys:
 
 * `states`: an array of unique strings naming all of the machine's states, including an accepting and rejecting state.
 * `symbols`: an array of unique single-character strings naming all of the machine's symbols, including a blank symbol.
-* `blank_symbol`: a string equal to one of the items in `symbols`. The machine's tape will initially be filled with this, apart from the input data. the blank symbol may not appear in the input data.
+* `blank_symbol`: a string equal to one of the items in `symbols`. The machine's tape will initially be filled with this, apart from the input data.
 * `start_state`: a string equal to one of the items in `states`. This will be the machine's initial state.
 * `accept_state`: a string equal to one of the items in `states`. The machine will halt and accept on reaching this state.
 * `reject_state`: a string equal to one of the items in `states`. The machine will halt and reject on reaching this state.
