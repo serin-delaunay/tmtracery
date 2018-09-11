@@ -8,7 +8,7 @@ from collections import OrderedDict
 # Forward, Back, Stay
 directions = "><_"
 # Tracery special characters, JSON special characters, CBDQ special characters, and *
-reserved_characters = '[],{}#"*\n \t'
+reserved_characters = '[],.{}#"*\n \t'
 
 class StateSymbol(NamedTuple):
     """
