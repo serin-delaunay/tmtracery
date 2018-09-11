@@ -2,7 +2,7 @@
 	"origin": "#init##run#",
 
 	"init": "#init_machine##init_state##init_tape#",
-	"init_machine": "[run_next:]",
+	"init_machine": "[run_next:][rewind_next:][show_left_next:]",
 	"init_state": "This variable must be replaced by the compiler.#FAIL#",
 	"init_tape": "This variable must be replaced by the compiler.#FAIL#",
 
@@ -39,10 +39,36 @@
 	"move<": "[tape_right:#tape_left#][tape_left:POP]",
 	"move_": "",
 
-	"terminate": "#state##rewind_tape##show_tape#",
-	"rewind_tape": "\nrewinding",
-	"show_tape": "\nprinting",
+	"terminate": "#state#\n#rewind_tape##show_tape#",
 
+	"rewind_tape": "#drop_rewind##rewind_step##rewind_next#",
+	"rewind_step": "[tape_left_reversed:#tape_left#][tape_left:POP]#load_rewind##rewind_next#",
+	"rewind_next": "#rewind_tape#",
+	"load_rewind": "[rewind_next:#activate_rewind#]",
+	"activate_rewind": "\\#rewind#tape_left#\\#",
+	"drop_rewind": "[rewind_next:]",
+	"rewind*": "",
+
+	"show_tape": "#show_left#*#show_right#",
+
+	"show_left": "#drop_show_left##show_left_step##show_left_next#",
+	"show_left_step": "#tape_left_reversed#[tape_left_reversed:POP]#load_show_left##show_left_next#",
+	"show_left_next": "#show_left#",
+	"drop_show_left": "[show_left_next:POP]",
+	"load_show_left": "[show_left_next:#activate_show_left#]",
+	"activate_show_left": "\\#show_left#tape_left_reversed#\\#",
+	"show_left*": "",
+
+	"show_right": "#drop_show_right##show_right_step##show_right_next#",
+	"show_right_step": "#tape_right#[tape_right:POP]#load_show_right##show_right_next#",
+	"show_right_next": "#show_right#",
+	"drop_show_right": "[show_right_next:POP]",
+	"load_show_right": "[show_right_next:#activate_show_right#]",
+	"activate_show_right": "\\#show_right#tape_right#\\#",
+	"show_right*": "",
+
+
+	"tape_left_reversed": "*",
 	"tape_left": "*",
 	"tape_right": "*",
 	"blank": "This variable must be replaced by the compiler.#FAIL#",

@@ -129,6 +129,9 @@ def main():
     for symbol in machine.symbols:
         machine_tracery["padder_left{}".format(symbol)] = ""
         machine_tracery["padder_right{}".format(symbol)] = ""
+        machine_tracery["rewind{}".format(symbol)] = "#rewind_tape#"
+        machine_tracery["show_left{}".format(symbol)] = "#show_left#"
+        machine_tracery["show_right{}".format(symbol)] = "#show_right#"
     for state in machine.states:
         if state == machine.accept_state:
             continue
